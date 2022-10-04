@@ -1,6 +1,5 @@
 pipeline {
     agent any
-
     tools {
         maven "MAVEN"
         jdk "JDK"
@@ -33,10 +32,9 @@ pipeline {
          	steps {
          		script {
   					withCredentials([string(credentialsId: 'dockerhub-PW', variable: 'dockerhubPW')]) {
-  						bat 'echo %dockerhubPW%'
     					bat 'docker login --username suphachoke --password %dockerhubPW%'
 					}
-					bat 'docker push suphachoke/demojenkinsdeploydocker:1.1'
+					bat 'docker push suphachoke/devops-integration'
          		} 
         	}
    		}
