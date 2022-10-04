@@ -32,10 +32,10 @@ pipeline {
         stage('Push Image to DockerHub'){
          	steps {
          		script {
-  					withCredentials([string(credentialsId: 'dockerhubST', variable: 'dockerhubST')]) {
+  					withCredentials([string(credentialsId: 'dockerhubPW', variable: 'dockerhubST')]) {
     					bat 'docker login -u suphachoke -p ${dockerhubST}'
 					}
-					bat 'dockerpush suphachoke/demojenkinsdeploydocker'
+					bat 'docker push suphachoke/demojenkinsdeploydocker'
          		} 
         	}
    		}
