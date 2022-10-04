@@ -27,11 +27,18 @@ pipeline {
                 script{
                     bat 'docker build -t suphachoke/devops-integration .'
                 }
-
             }
-
         }
-
+        stage('Push Image to DockerHub'){
+         	steps {
+         		script {
+  					withCredentials([string(credentialsId: 'dockerhubST', variable: 'dockerhubST')]) {
+    					bat 'docker login -u suphachoke -p ${dockerhubST}'
+					}
+					bat 'dockerpush suphachoke/demojenkinsdeploydocker'
+         		} 
+        	}
+   		}
    }
 }
   
