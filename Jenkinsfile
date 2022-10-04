@@ -22,6 +22,16 @@ pipeline {
                 bat 'mvn clean install'
             }
         }
+        stage('Bulid Image'){
+            steps {
+                script{
+                    bat 'docker build -t suphachoke/devops-integration .'
+                }
+
+            }
+
+        }
+
    }
 }
   
