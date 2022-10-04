@@ -15,7 +15,9 @@ pipeline {
         }
         stage('Build Maven') {
             steps {
+            	//case direct path
                 //dir("C:/Users/2521120036/git/DemoJenkinsPipelineDeployDocker") {
+                //case generate by pipeline systax
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/2521120036/DemoJenkinsPipelineDeployDocker']]])
                 bat 'mvn clean install'
             }
