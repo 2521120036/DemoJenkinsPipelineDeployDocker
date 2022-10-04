@@ -1,14 +1,26 @@
 pipeline {
     agent any
-    tools{
-        maven 'MAVEN'
+
+    tools {
+        maven "MAVEN"
+        jdk "JDK"
     }
-    stages{
-        stage('Build Maven'){
+//qdqwd
+    stages {
+        stage('Initialize'){
             steps{
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Java-Techie-jt/devops-automation']]])
-                bat 'mvn clean install'
+                echo "PATH = ${M2_HOME}/bin:${PATH}"
+                echo "M2_HOME = /opt/maven"
             }
         }
-    }
+        stage('Build Maven') {
+            steps {
+                dir("C:/Users/2521120036/git/DemoJenkinsPipelineDeployDocker") {
+                bat 'mvn clean install'
+                }
+            
+            }
+        }
+   }
 }
+  
