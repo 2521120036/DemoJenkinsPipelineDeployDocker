@@ -32,8 +32,8 @@ pipeline {
         stage('Push Image to DockerHub'){
          	steps {
          		script {
-  					withCredentials([string(credentialsId: 'dockerhubPW', variable: 'dockerhub')]) {
-    					bat 'docker login -u suphachoke -p ${dockerhub}'
+  					withCredentials([string(credentialsId: 'dockerhub-PW', variable: 'dockerhubPW')]) {
+    					bat 'docker login -u suphachoke -p ${dockerhubPW}'
 					}
 					bat 'docker push suphachoke/demojenkinsdeploydocker'
          		} 
