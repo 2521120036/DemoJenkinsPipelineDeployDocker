@@ -33,7 +33,7 @@ pipeline {
          	steps {
          		script {
   					withCredentials([string(credentialsId: 'dockerhub-PW', variable: 'dockerhubPW')]) {
-    					bat 'docker login --username suphachoke --password-dockerhubPW'
+    					bat 'docker login --username suphachoke --password ${dockerhubPW}'
 					}
 					bat 'docker push suphachoke/demojenkinsdeploydocker:1.1'
          		} 
