@@ -17,7 +17,9 @@ pipeline {
             	//case direct path
                 //dir("C:/Users/2521120036/git/DemoJenkinsPipelineDeployDocker") {
                 //case generate by pipeline systax
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/2521120036/DemoJenkinsPipelineDeployDocker']]])
+                withCredentials([string(credentialsId: 'IDgit-name', variable: 'git-name')]) {
+    				checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: '%git-name%']]])
+				}
                 bat 'mvn clean install'
             }
         }
@@ -36,7 +38,9 @@ pipeline {
   					withCredentials([string(credentialsId: 'dockerhub-PW', variable: 'dockerhubPW')]) {
     					bat 'docker login --username suphachoke --password %dockerhubPW%'
 					}
-					bat 'docker push %repo-name%'
+					withCredentials([string(credentialsId: 'IDrepo-name', variable: 'repo-name')]) {
+						bat 'docker push %repo-name%'
+					}
          		} 
         	}
    		}
