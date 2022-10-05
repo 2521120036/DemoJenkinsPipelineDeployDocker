@@ -24,7 +24,9 @@ pipeline {
         stage('Bulid Image'){
             steps {
                 script{
-                    bat 'docker build -t suphachoke/devops-integration .'
+                	withCredentials([string(credentialsId: 'IDrepo-name', variable: 'repo-name')]) {
+                		bat 'docker build -t %repo-name% .'
+                	}
                 }
             }
         }
@@ -34,7 +36,7 @@ pipeline {
   					withCredentials([string(credentialsId: 'dockerhub-PW', variable: 'dockerhubPW')]) {
     					bat 'docker login --username suphachoke --password %dockerhubPW%'
 					}
-					bat 'docker push suphachoke/devops-integration'
+					bat 'docker push %repo-name%'
          		} 
         	}
    		}
