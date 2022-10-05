@@ -9,4 +9,3 @@ ADD target/devops-integration.jar devops-integration.jar
 #compile
 ENTRYPOINT ["java","-jar","/devops-integration.jar"]
 
-#test just commit
