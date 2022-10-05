@@ -17,10 +17,7 @@ pipeline {
             	//case direct path
                 //dir("C:/Users/2521120036/git/DemoJenkinsPipelineDeployDocker") {
                 //case generate by pipeline systax
-                withCredentials([string(credentialsId: 'IDgit-name', variable: 'git-name')]) {
-                	echo '%git-name%'
-    				checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: '%git-name%']]])
-				}
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/2521120036/DemoJenkinsPipelineDeployDocker']]])
                 bat 'mvn clean install'
             }
         }
